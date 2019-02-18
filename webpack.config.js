@@ -1,15 +1,20 @@
 const path = require('path');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 let conf = {
-    entry: "./src/index.js",
+    entry: {
+        app: "./src/index.js"
+    },
     // context: path.resolve(__dirname, 'src'),
     output: {
-        filename: "bundle.js",
+        filename: "[name].js",                  // [name] === 'app' взято из названия ключа в entry
         path: path.resolve(__dirname, 'dist'),
-        publicPath: "dist/"
+        publicPath: "/dist"                     // настройка для devServer
     },
     devServer: {
-        // overlay: true
+        overlay: true                           // настройка devServer для отображения ошибок не в консоли браузера, а прямо на экране
     },
     module: {
         rules: [
@@ -19,8 +24,18 @@ let conf = {
                 // exclude: "/node_modules"
             }
         ]
-    }
-    // devtool: "eval-sourcemap"
+    },
+    plugins: [
+        new CopyWebpackPlugin([{
+            from: 'img/**/**',
+            to: path.resolve(__dirname, 'dist')
+        }]),
+        new ImageminPlugin({
+            pngquant: ({quality: '50'}),
+            plugins: [imageminMozjpeg({quality: '50'})]
+        })
+    ]
+    // devtool: "eval-sourcemap",
 };
 
 module.exports = (env, options) => {
