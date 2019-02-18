@@ -5,4 +5,4 @@ console.log(x(1)(7));
 
 
 const path = require('path');
-console.log(path.resolve(__dirname));
+console.log(`path = ${path.resolve(__dirname)}`);
