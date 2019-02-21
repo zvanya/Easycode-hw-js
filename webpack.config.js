@@ -2,6 +2,8 @@ const path = require('path');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 let conf = {
     entry: {
@@ -21,7 +23,26 @@ let conf = {
             {
                 test: /\.js$/,
                 loader: "babel-loader",
-                // exclude: "/node_modules"
+                exclude: "/node_modules"
+            }, {
+                test: /\.css$/,
+                use : [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
+            }, {
+                test: /\.scss$/,
+                use : [
+                    "style-loader",
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: { sourceMap: true }
+                    },                     {
+                        loader: "sass-loader",
+                        options: { sourceMap: true }
+                    }
+                ]
             }
         ]
     },
@@ -33,6 +54,10 @@ let conf = {
         new ImageminPlugin({
             pngquant: ({quality: '50'}),
             plugins: [imageminMozjpeg({quality: '50'})]
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            // chunkFilename: "[id].css"
         })
     ]
     // devtool: "eval-sourcemap",
