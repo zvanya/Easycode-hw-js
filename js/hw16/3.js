@@ -11,32 +11,26 @@ function Furniture(name = "table", price = 70) {
     this.price = price;
 }
 Furniture.prototype.getInfo = function() {
-    return `name: ${this.name}, price: ${this.price}`;
+    return {name: this.name, price: this.price};
 };
 
 
-function OfficeFurniture(name, price, isTableExist = false) {
-    Furniture.apply(this, arguments);
-    this.isTableExist = isTableExist;
-}
-OfficeFurniture.prototype.constructor = OfficeFurniture;
-OfficeFurniture.prototype.getInfo = function () {
-    console.log(`${Furniture.prototype.getInfo.apply(this, arguments)}, table: ${this.isTableExist}`);
+const officeFurniture = new Furniture('OfficeTable', 75);
+officeFurniture.isTableExist = true;
+
+homeFurniture.getInfo = function() {
+    const info = Furniture.prototype.getInfo.call(this);
+    info.isTableExist = this.isTableExist;
+    
+    return info;
 };
 
+const homeFurniture = new Furniture('Chair', 35);
+homeFurniture.isChairExist = true;
 
-function HomeFurniture(name, price, isChairExist = true) {
-    Furniture.apply(this, arguments);
-    this.isChairExist = isChairExist;
-}
-HomeFurniture.prototype.constructor = HomeFurniture;
-HomeFurniture.prototype.getInfo = function () {
-    console.log(`${Furniture.prototype.getInfo.apply(this, arguments)}, chair: ${this.isChairExist}`);
+homeFurniture.getInfo = function() {
+    const info = Furniture.prototype.getInfo.call(this);
+    info.isChairExist = this.isChairExist;
+    
+    return info;
 };
-
-
-const f1 = new OfficeFurniture("t1", 100, true);
-f1.getInfo();
-
-const f2 = new HomeFurniture("t2", 150, false);
-f2.getInfo();
