@@ -33,6 +33,7 @@ function Admin(name, reg) {
     User.apply(this, arguments);
     this._superAdmin = false;
 }
+Admin.prototype = Object.create(User.prototype);
 Admin.prototype.constructor = Admin;
 
 Admin.prototype.getInfo = function() {
@@ -52,6 +53,7 @@ function Guest(name, reg, validDate = "1 week") {
     User.apply(this, arguments);
     this.validDate = validDate;
 }
+Guest.prototype = Object.create(User.prototype);
 Guest.prototype.constructor = Guest;
 
 Guest.prototype.getInfo = function() {
