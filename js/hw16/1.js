@@ -14,7 +14,11 @@
 //     var earth = new PlanetWithSatellite('earth', 'moon');
 //     earth.getName(); // 'Planet name is earth. The satellite is moon’
 
-
+/**
+ *
+ * @param {String} name
+ * @constructor
+ */
 function Planet(name = "Mars") {
     this.name = name;
     this.getName = function () {
@@ -22,6 +26,12 @@ function Planet(name = "Mars") {
     }
 }
 
+/**
+ *
+ * @param {String} name
+ * @param {String} satelliteName
+ * @constructor
+ */
 function PlanetWithSatellite(name, satelliteName = "satt1") {
     Planet.apply(this, arguments);
 

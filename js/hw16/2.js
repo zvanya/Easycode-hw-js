@@ -9,6 +9,12 @@
 //    количествоМагазинов}
 //    От каждого класса создать экземпляр (дом, торговый центр)
 
+/**
+ *
+ * @param {String} name
+ * @param {Number} floorsCount
+ * @constructor
+ */
 function Building(name = "emptyName", floorsCount = 10) {
     this.name = name;
     this.floorsCount = floorsCount;
@@ -22,6 +28,13 @@ function Building(name = "emptyName", floorsCount = 10) {
     };
 }
 
+/**
+ *
+ * @param {String} name
+ * @param {Number} floorsCount
+ * @param {Number} flatPerFloor
+ * @constructor
+ */
 function House(name, floorsCount, flatPerFloor = 1) {
     Building.apply(this, arguments);
     this.flatPerFloor = flatPerFloor;
@@ -31,6 +44,13 @@ function House(name, floorsCount, flatPerFloor = 1) {
     }
 }
 
+/**
+ *
+ * @param {String} name
+ * @param {Number} floorsCount
+ * @param {Number} shopPerFloor
+ * @constructor
+ */
 function Plaza(name, floorsCount, shopPerFloor = 1) {
     Building.apply(this, arguments);
     this.shopPerFloor = shopPerFloor;

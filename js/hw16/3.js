@@ -6,6 +6,12 @@
 //    “получить информацию” должен учитывать и добавленное вами новое свойство.
 //     Задача на переопределение метода у экземпляров класса.
 
+/**
+ *
+ * @param {String} name
+ * @param {Number} price
+ * @constructor
+ */
 function Furniture(name = "table", price = 70) {
     this.name = name;
     this.price = price;

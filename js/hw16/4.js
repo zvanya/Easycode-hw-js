@@ -9,7 +9,12 @@
 //    У классов-наследников метод “получить информацию” должен так же содержать информацию о
 //    дополнительных свойствах (“суперАдмин” и “срокДействия”)
 
-
+/**
+ *
+ * @param {String} name
+ * @param {String} reg
+ * @constructor
+ */
 function User(name = "User1", reg = "1970-01-01") {
     this.name = name;
     this.reg = reg;
@@ -18,7 +23,12 @@ User.prototype.getInfo = function() {
     return {name: this.name, reg: this.reg};
 };
 
-
+/**
+ *
+ * @param {String} name
+ * @param {String} reg
+ * @constructor
+ */
 function Admin(name, reg) {
     User.apply(this, arguments);
     this._superAdmin = false;
@@ -31,7 +41,13 @@ Admin.prototype.getInfo = function() {
     return info;
 };
 
-
+/**
+ *
+ * @param {String} name
+ * @param {String} reg
+ * @param {String} validDate
+ * @constructor
+ */
 function Guest(name, reg, validDate = "1 week") {
     User.apply(this, arguments);
     this.validDate = validDate;
